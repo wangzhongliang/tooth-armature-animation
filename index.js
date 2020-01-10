@@ -13,7 +13,7 @@ var clock = new THREE.Clock();
 
 var camera = new THREE.PerspectiveCamera( 45, container.offsetWidth / container.offsetHeight, 0.001, 1000 );
 scene.add( camera );
-camera.position.set(5,5,5);
+camera.position.set(10,10,10);
 
 var ambient = new THREE.AmbientLight( 0x222222,2 );
 scene.add( ambient );
