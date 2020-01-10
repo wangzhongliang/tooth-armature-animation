@@ -19,7 +19,7 @@ var ambient = new THREE.AmbientLight( 0x222222,2 );
 scene.add( ambient );
 
 var directionalLight = new THREE.DirectionalLight( 0xdddddd, 4 );
-directionalLight.position.set( 1, 0, 1 ).normalize();
+directionalLight.position.set( 1, 1, 1 ).normalize();
 scene.add( directionalLight );
 
 renderer.shadowMap.enabled = true;
