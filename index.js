@@ -34,7 +34,7 @@ var loader = new THREE.GLTFLoader();
 // loader.setDRACOLoader(dracoLoader);
 var loadStartTime = performance.now();
 var mixer,gltf,playAnimation=false;
-loader.load('data/tooth3.glb', function (data) {
+loader.load('data/tooth4.glb', function (data) {
 
     gltf = data;
 
