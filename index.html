@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>牙齿正畸骨骼动画演示</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <script src="three.min.js"></script>
+        <script src="./lib/OrbitControls.js"></script>
+        <script src="./lib/GLTFLoader.js"></script>
+        <script src="./lib/DRACOLoader.js"></script>
+    </head>
+    <style>
+        body, #container{
+            width: 100%;
+            height: 100%;
+            margin:auto;
+            overflow: hidden;
+        }
+    </style>
+	<body>
+        <div style="position:absolute;top:1rem;left:1rem;">
+            <input type="button" value="演示" onclick="toggleAnimations()">
+        </div>
+        <div id='container'></div>
+		<script src='index.js'></script>
+
+	</body>
+</html>
