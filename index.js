@@ -32,8 +32,12 @@ var orbitControls = new THREE.OrbitControls( camera, renderer.domElement );
 orbitControls.minDistance = 5;
 orbitControls.maxDistance = 20;
 // orbitControls.target.copy( new THREE.Vector3(0,0,0));
-var loader = new THREE.GLTFLoader();
+var manager = new THREE.LoadingManager();
+var loader = new THREE.GLTFLoader(manager);
 
+manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
+    upperhint.innerHTML = '模型已下载: ('+ itemsLoaded + '/' + itemsTotal + ') 个.' ;
+};
 // var dracoLoader = new THREE.DRACOLoader();
 // dracoLoader.setDecoderPath('lib/gltf/');
 // loader.setDRACOLoader(dracoLoader);
@@ -61,11 +65,11 @@ loader.load('data/upperUVTexture.glb', function (data) {
     scene.add(object);
     onWindowResize();
 }, function ( xhr ) {
-    if(xhr.loaded / xhr.total>=1){
-        upperhint.innerHTML='';
-        return;
-    }
-    upperhint.innerHTML = '上牙模型已下载 '+(xhr.loaded / xhr.total * 100) + '%' ;
+    // if(xhr.loaded / xhr.total>=1){
+    //     upperhint.innerHTML='';
+    //     return;
+    // }
+    // upperhint.innerHTML = '上牙模型已下载 '+(xhr.loaded / xhr.total * 100) + '%' ;
 
 }, function (error) {
     console.error(error);
@@ -92,11 +96,11 @@ loader.load('data/lowerUVTexture.glb', function (data) {
     scene.add(object);
     onWindowResize();
 }, function ( xhr ) {
-    if(xhr.loaded / xhr.total>=1){
-        lowerhint.innerHTML='';
-        return;
-    }
-    lowerhint.innerHTML='下牙模型已下载 '+(xhr.loaded / xhr.total * 100) + '%' ;
+    // if(xhr.loaded / xhr.total>=1){
+    //     lowerhint.innerHTML='';
+    //     return;
+    // }
+    // lowerhint.innerHTML='下牙模型已下载 '+(xhr.loaded / xhr.total * 100) + '%' ;
 }, function (error) {
     console.error(error);
 });
