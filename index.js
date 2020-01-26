@@ -175,8 +175,8 @@ open.value = isOpen?"合上":"打开";
 open.onclick = ()=>{
     isOpen = !isOpen;
     if(isOpen){
-        upperObject.position.set(0,2,0)
-        lowerObject.position.set(0,-2,0)
+        upperObject.position.set(0,1,0)
+        lowerObject.position.set(0,-1,0)
     }
     else{
         upperObject.position.set(0,0,0)
