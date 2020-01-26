@@ -25,6 +25,10 @@ var directionalLight = new THREE.DirectionalLight( 0xdddddd, 3 );
 directionalLight.position.set( -1, 0, 0 ).normalize();
 scene.add( directionalLight );
 
+var pointLight = new THREE.PointLight( 0xdddddd, 3 );
+pointLight.position.set( 1, 0, 0 ).normalize();
+scene.add( pointLight );
+
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
@@ -48,11 +52,11 @@ var loader = new THREE.GLTFLoader(manager);
 // dracoLoader.setDecoderPath('lib/gltf/');
 // loader.setDRACOLoader(dracoLoader);
 var loadStartTime = performance.now();
-var mixerupper,mixerlower,upper,lower,playAnimation=false;
+var mixerupper,mixerlower,upper,lower,upperObject,lowerObject,playAnimation=false;
 var upperhint = document.getElementById('upperhint');
-loader.load('data/upperUVTexture.glb', function (data) {
+loader.load('data/upperNoUV.glb', function (data) {
     upper = data;
-    var object = upper.scene;
+    var object = upperObject = upper.scene;
     console.info('Load time: ' + (performance.now() - loadStartTime).toFixed(2) + ' ms.');
     object.traverse(function (node) {
         if (node.isMesh || node.isLight) node.castShadow = true;
@@ -88,9 +92,9 @@ loader.load('data/upperUVTexture.glb', function (data) {
     console.error(error);
 });
 var lowerhint = document.getElementById('lowerhint');
-loader.load('data/lowerUVTexture.glb', function (data) {
+loader.load('data/lowerNoUV.glb', function (data) {
     lower = data;
-    var object = lower.scene;
+    var object = lowerObject = lower.scene;
     console.info('Load time: ' + (performance.now() - loadStartTime).toFixed(2) + ' ms.');
     object.traverse(function (node) {
         if (node.isMesh || node.isLight) node.castShadow = true;
@@ -165,4 +169,19 @@ toggle.onclick = ()=>{
     // toggle.value = playAnimation?"停止":"演示";
 }
 
+var isOpen = false;
+var open = document.getElementById('open');
+open.value = isOpen?"合上":"打开";
+open.onclick = ()=>{
+    isOpen = !isOpen;
+    if(isOpen){
+        upperObject.position.set(0,2,0)
+        lowerObject.position.set(0,-2,0)
+    }
+    else{
+        upperObject.position.set(0,0,0)
+        lowerObject.position.set(0,0,0)
+    }
+    open.value = isOpen?"合上":"打开";
+}
 animate();
