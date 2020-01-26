@@ -18,7 +18,7 @@ camera.position.set(-10,0,0);
 // var axesHelper = new THREE.AxesHelper( 5 );
 // scene.add( axesHelper );
 
-var ambient = new THREE.AmbientLight( 0xffffff,1.5 );
+var ambient = new THREE.AmbientLight( 0xffffff,1 );
 scene.add( ambient );
 
 var directionalLight = new THREE.DirectionalLight( 0xdddddd, 3 );
@@ -70,7 +70,8 @@ loader.load('data/upperUVTexture.glb', function (data) {
         mixerupper.addEventListener( 'finished', function( e ) {
             // console.log(e)
             // e.action.stop();
-            console.log('finish')
+            // console.log('finish')
+            toggle.disabled=false;
         } );
     }
     object.scale.set(0.1,0.1,0.1)
@@ -107,7 +108,8 @@ loader.load('data/lowerUVTexture.glb', function (data) {
         mixerlower.addEventListener( 'finished', function( e ) {
             // console.log(e)
             // e.action.stop();
-            console.log('finish')
+            // console.log('finish');
+            toggle.disabled=false;
         } );
     }
     object.scale.set(0.1,0.1,0.1)
@@ -159,6 +161,7 @@ toggle.onclick = ()=>{
         action.stop();
         action.play();
     }
+    toggle.disabled=true;
     // toggle.value = playAnimation?"停止":"演示";
 }
 
