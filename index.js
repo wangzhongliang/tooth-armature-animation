@@ -38,6 +38,9 @@ var loader = new THREE.GLTFLoader(manager);
 manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
     upperhint.innerHTML = '模型已下载: ('+ itemsLoaded + '/' + itemsTotal + ') 个.' ;
 };
+manager.onLoad = function ( ) {
+	upperhint.innerHTML='';
+};
 // var dracoLoader = new THREE.DRACOLoader();
 // dracoLoader.setDecoderPath('lib/gltf/');
 // loader.setDRACOLoader(dracoLoader);
