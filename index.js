@@ -18,10 +18,10 @@ camera.position.set(-10,0,0);
 // var axesHelper = new THREE.AxesHelper( 5 );
 // scene.add( axesHelper );
 
-var ambient = new THREE.AmbientLight( 0x222222,2 );
+var ambient = new THREE.AmbientLight( 0xffffff,1.5 );
 scene.add( ambient );
 
-var directionalLight = new THREE.DirectionalLight( 0xdddddd, 4 );
+var directionalLight = new THREE.DirectionalLight( 0xdddddd, 3 );
 directionalLight.position.set( -1, 0, 0 ).normalize();
 scene.add( directionalLight );
 
@@ -63,9 +63,15 @@ loader.load('data/upperUVTexture.glb', function (data) {
         for (var i = 0; i < animations.length; i++) {
             var animation = animations[i];
             var action = mixerupper.clipAction(animation);
-            // action.loop=THREE.LoopOnce
+            action.loop=THREE.LoopOnce
+            action.clampWhenFinished = true;
             // action.play();
         }
+        mixerupper.addEventListener( 'finished', function( e ) {
+            // console.log(e)
+            // e.action.stop();
+            console.log('finish')
+        } );
     }
     object.scale.set(0.1,0.1,0.1)
     scene.add(object);
@@ -94,9 +100,15 @@ loader.load('data/lowerUVTexture.glb', function (data) {
         for (var i = 0; i < animations.length; i++) {
             var animation = animations[i];
             var action = mixerlower.clipAction(animation);
-            // action.loop=THREE.LoopOnce
+            action.loop=THREE.LoopOnce
+            action.clampWhenFinished = true;
             // action.play();
         }
+        mixerlower.addEventListener( 'finished', function( e ) {
+            // console.log(e)
+            // e.action.stop();
+            console.log('finish')
+        } );
     }
     object.scale.set(0.1,0.1,0.1)
     scene.add(object);
@@ -134,17 +146,20 @@ function onWindowResize() {
 var toggle = document.getElementById('toggle');
 toggle.value = playAnimation?"停止":"演示";
 toggle.onclick = ()=>{
-    playAnimation=!playAnimation;
+    // playAnimation=!playAnimation;
     for ( var i = 0; i < upper.animations.length; i ++ ) {
         var clip = upper.animations[ i ];
         var action = mixerupper.existingAction( clip );
-        playAnimation ? action.play() : action.stop();
+        action.stop();
+        action.play();
     }
     for ( var i = 0; i < lower.animations.length; i ++ ) {
         var clip = lower.animations[ i ];
         var action = mixerlower.existingAction( clip );
-        playAnimation ? action.play() : action.stop();
+        action.stop();
+        action.play();
     }
-    toggle.value = playAnimation?"停止":"演示";
+    // toggle.value = playAnimation?"停止":"演示";
 }
+
 animate();
