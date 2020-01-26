@@ -33,14 +33,17 @@ orbitControls.minDistance = 5;
 orbitControls.maxDistance = 20;
 // orbitControls.target.copy( new THREE.Vector3(0,0,0));
 var manager = new THREE.LoadingManager();
-var loader = new THREE.GLTFLoader(manager);
-
+manager.onStart = function ( url, itemsLoaded, itemsTotal ) {
+	upperhint.innerHTML = '正在下载模型, 已下载: ('+ itemsLoaded + '/' + itemsTotal + ') 个.' ;
+};
 manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
-    upperhint.innerHTML = '模型已下载: ('+ itemsLoaded + '/' + itemsTotal + ') 个.' ;
+    upperhint.innerHTML = '正在下载模型, 已下载: ('+ itemsLoaded + '/' + itemsTotal + ') 个.' ;
 };
 manager.onLoad = function ( ) {
 	upperhint.innerHTML='';
 };
+var loader = new THREE.GLTFLoader(manager);
+
 // var dracoLoader = new THREE.DRACOLoader();
 // dracoLoader.setDecoderPath('lib/gltf/');
 // loader.setDRACOLoader(dracoLoader);
