@@ -39,6 +39,7 @@ var loader = new THREE.GLTFLoader();
 // loader.setDRACOLoader(dracoLoader);
 var loadStartTime = performance.now();
 var mixerupper,mixerlower,upper,lower,playAnimation=false;
+var upperhint = document.getElementById('upperhint');
 loader.load('data/upperUVTexture.glb', function (data) {
     upper = data;
     var object = upper.scene;
@@ -59,9 +60,17 @@ loader.load('data/upperUVTexture.glb', function (data) {
     object.scale.set(0.1,0.1,0.1)
     scene.add(object);
     onWindowResize();
-}, undefined, function (error) {
+}, function ( xhr ) {
+    if(xhr.loaded / xhr.total>=1){
+        upperhint.innerHTML='';
+        return;
+    }
+    upperhint.innerHTML = '上牙模型已下载 '+(xhr.loaded / xhr.total * 100) + '%' ;
+
+}, function (error) {
     console.error(error);
 });
+var lowerhint = document.getElementById('lowerhint');
 loader.load('data/lowerUVTexture.glb', function (data) {
     lower = data;
     var object = lower.scene;
@@ -82,7 +91,13 @@ loader.load('data/lowerUVTexture.glb', function (data) {
     object.scale.set(0.1,0.1,0.1)
     scene.add(object);
     onWindowResize();
-}, undefined, function (error) {
+}, function ( xhr ) {
+    if(xhr.loaded / xhr.total>=1){
+        lowerhint.innerHTML='';
+        return;
+    }
+    lowerhint.innerHTML='下牙模型已下载 '+(xhr.loaded / xhr.total * 100) + '%' ;
+}, function (error) {
     console.error(error);
 });
 
