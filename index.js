@@ -54,7 +54,7 @@ var loader = new THREE.GLTFLoader(manager);
 var loadStartTime = performance.now();
 var mixerupper,mixerlower,upper,lower,upperObject,lowerObject,playAnimation=false;
 var upperhint = document.getElementById('upperhint');
-loader.load('data/upperUVTexture.glb', function (data) {
+loader.load('data/upper2.glb', function (data) {
     upper = data;
     var object = upperObject = upper.scene;
     console.info('Load time: ' + (performance.now() - loadStartTime).toFixed(2) + ' ms.');
@@ -92,7 +92,7 @@ loader.load('data/upperUVTexture.glb', function (data) {
     console.error(error);
 });
 var lowerhint = document.getElementById('lowerhint');
-loader.load('data/lowerUVTexture.glb', function (data) {
+loader.load('data/lower2.glb', function (data) {
     lower = data;
     var object = lowerObject = lower.scene;
     console.info('Load time: ' + (performance.now() - loadStartTime).toFixed(2) + ' ms.');
